@@ -1,0 +1,19 @@
+name: nylc
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - biopython=1.84
+  - pandas=2.2
+  - numpy
+  - openpyxl
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - jupyter
+  - ipykernel
+  - ipywidgets
+  - nbconvert
+  - pymol-open-source
+  - fpocket
+  - mafft

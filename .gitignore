@@ -1,0 +1,6 @@
+af2_models/
+results/
+*.pse
+.ipynb_checkpoints/
+.DS_Store
+__pycache__/
