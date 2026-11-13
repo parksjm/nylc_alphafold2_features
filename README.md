@@ -33,13 +33,13 @@ The notebooks expect files named `<name>_4x2_relaxed_rank_001_*.pdb` and `<name>
 They then generate the processed models (renumbered, chain-renamed) for all 285 enzymes from these raw files.
 
 ## Run Jupyter notebooks
-1. `nylc_all_prep_20261111.ipynb` writes `results/cleavage_site.csv` and the ColabFold FASTA files (`results/fasta_af2/`). Run ColabFold on those if you want to regenerate models.
-2. `nylc_all_postprocess_20261111.ipynb` writes processed models, per-feature CSVs (`results/features/`) and `results/nylc_all.merged_data_<date>.csv`. It ends with a comparison against `legacy/nylc_all.merged_data_20250310.csv`.
+1. `nylc_all_prep.ipynb` writes `results/cleavage_site.csv` and the ColabFold FASTA files (`results/fasta_af2/`). Run ColabFold on those if you want to regenerate models.
+2. `nylc_all_postprocess.ipynb` writes processed models, per-feature CSVs (`results/features/`) and `results/nylc_all.merged_data_<date>.csv`. It ends with a comparison against `legacy/nylc_all.merged_data_20250310.csv`.
 
 Headless:
 ```bash
-jupyter nbconvert --to notebook --execute nylc_all_prep_20261111.ipynb --output-dir results/executed
-jupyter nbconvert --to notebook --execute nylc_all_postprocess_20261111.ipynb --output-dir results/executed --ExecutePreprocessor.timeout=-1
+jupyter nbconvert --to notebook --execute nylc_all_prep.ipynb --output-dir results/executed
+jupyter nbconvert --to notebook --execute nylc_all_postprocess.ipynb --output-dir results/executed --ExecutePreprocessor.timeout=-1
 ```
 Runtime is about 10 minutes with 24 workers (`NYLC_N_JOBS`).
 
@@ -49,7 +49,6 @@ Runtime is about 10 minutes with 24 workers (`NYLC_N_JOBS`).
 | `data/` | MSA (`nylc_all.mafft.fasta`, L-INS-i via Jalview), sequences, activity table, 5y0m tetramer |
 | `scripts/` | PyMOL post-processing, BSA, fpocket descriptors, derivation of `data/` from the legacy files |
 | `legacy/` | Legacy merged feature table and cleavage sites used for regression checks |
-| `AUDIT_20261111.md` | Errors found in the original notebooks and how they were handled |
 
 ## Notes
 - BSA and fpocket descriptors depend slightly on the coordinate frame. The processing script therefore rotates all models into a fixed frame. Do not change it if you want to reproduce published values.
