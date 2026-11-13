@@ -3,7 +3,7 @@
 Pipeline to prepare sequences of putative nylon hydrolases (NylC homologs) for AlphaFold2/ColabFold, post-process the models
 (canonical chain IDs and residue numbering matching the NylC X-ray structure, PDB 5y0m) and compute features for machine learning.
 
-Panel: NylC-GYAQ (reference) + 95 homologs of the original Diversity Panel (`nyl001`-`nyl095`) + 189 additional homologs (`dp001`-`dp189`) = 285 models.
+Panel: NylC-GYAQ (reference) + 95 homologs of the original Diversity Panel from Drufva et al. Chem. Catal. 2025. DOI: 10.1016/j.checat.2025.101418 (`nyl001`-`nyl095`) plus 189 additional homologs (`dp001`-`dp189`) = 285 models.
 
 Authors: Megan M. Wisniewski and Jerry M. Parks
 
