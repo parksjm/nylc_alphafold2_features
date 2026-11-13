@@ -1,9 +1,9 @@
 # NylC homolog AlphaFold2 models: post-processing and feature calculation
 
 Pipeline to prepare sequences of putative nylon hydrolases (NylC homologs) for AlphaFold2/ColabFold, post-process the models
-(canonical chain IDs and residue numbering matching the NylC X-ray structure, PDB 5y0m) and compute features for machine learning.
+to canonicalize chain IDs and residue numbering by matching a NylC X-ray structure (PDB 5y0m, Negoro et al. Sci. Rep. 2018. DOI: https://doi.org/10.1038/s41598-018-27860-w) and compute selected features for machine learning.
 
-Panel: NylC-GYAQ (reference) + 95 homologs of the original Diversity Panel from Drufva et al. Chem. Catal. 2025. DOI: 10.1016/j.checat.2025.101418 (`nyl001`-`nyl095`) plus 189 additional homologs (`dp001`-`dp189`) = 285 models.
+Panel: NylC-GYAQ (reference sequence) + 95 homologs from the original Diversity Panel from Drufva et al. Chem. Catal. 2025. DOI: 10.1016/j.checat.2025.101418 (`nyl001`-`nyl095`) plus 189 additional homologs (`dp001`-`dp189`) = 285 models.
 
 Authors: Megan M. Wisniewski and Jerry M. Parks
 
@@ -14,7 +14,7 @@ mamba activate nylc
 ```
 (Linux or macOS; PyMOL, fpocket and MAFFT come from conda-forge.)
 
-## Get the AlphaFold2 models (not stored in this repo)
+## Download the AlphaFold2 models (not stored in this repo)
 Raw ColabFold output (relaxed rank-1 PDB + `scores` JSON files) for all models is on Zenodo, DOI [10.5281/zenodo.24201789](https://zenodo.org/records/24201789):
 
 | File | Contents | MD5 |
@@ -30,11 +30,11 @@ for f in raw_af2_dp95_zenodo raw_af2_dp189_zenodo; do
 done
 ```
 The notebooks expect files named `<name>_4x2_relaxed_rank_001_*.pdb` and `<name>_4x2_scores_rank_001_*.json` in `af2_models/raw/` (override with `NYLC_RAW_AF2_DIR`).
-The notebooks generate the processed models (renumbered, chain-renamed) for all 285 enzymes from these raw files.
+They then generate the processed models (renumbered, chain-renamed) for all 285 enzymes from these raw files.
 
-## Run
+## Run Jupyter notebooks
 1. `nylc_all_prep_20261111.ipynb` writes `results/cleavage_site.csv` and the ColabFold FASTA files (`results/fasta_af2/`). Run ColabFold on those if you want to regenerate models.
-2. `nylc_all_postprocess_20261111.ipynb` writes processed models, per-feature CSVs (`results/features/`) and `results/nylc_all.merged_data_<date>.csv`; it ends with a comparison against `legacy/nylc_all.merged_data_20250310.csv`.
+2. `nylc_all_postprocess_20261111.ipynb` writes processed models, per-feature CSVs (`results/features/`) and `results/nylc_all.merged_data_<date>.csv`. It ends with a comparison against `legacy/nylc_all.merged_data_20250310.csv`.
 
 Headless:
 ```bash
@@ -52,5 +52,5 @@ Runtime is about 10 minutes with 24 workers (`NYLC_N_JOBS`).
 | `AUDIT_20261111.md` | Errors found in the original notebooks and how they were handled |
 
 ## Notes
-- BSA and fpocket descriptors depend slightly on the coordinate frame. The processing script therefore rotates all models into a fixed frame; do not change it if you want to reproduce published values.
+- BSA and fpocket descriptors depend slightly on the coordinate frame. The processing script therefore rotates all models into a fixed frame. Do not change it if you want to reproduce published values.
 - Legacy column `Thr219_equiv` is named `Thr267_equiv` here.
