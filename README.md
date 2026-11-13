@@ -53,3 +53,6 @@ Runtime is about 10 minutes with 24 workers (`NYLC_N_JOBS`).
 ## Notes
 - BSA and fpocket descriptors depend slightly on the coordinate frame. The processing script therefore rotates all models into a fixed frame. Do not change it if you want to reproduce published values.
 - Legacy column `Thr219_equiv` is named `Thr267_equiv` here.
+
+## License
+BSD 3-Clause (see `LICENSE`).
