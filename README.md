@@ -5,7 +5,7 @@ Pipeline to prepare sequences of putative nylon hydrolases (NylC homologs) for A
 
 Panel: NylC-GYAQ (reference) + 95 homologs of the original Diversity Panel (`nyl001`-`nyl095`) + 189 additional homologs (`dp001`-`dp189`) = 285 models.
 
-Authors: Megan M. Wisniewski and Jerry M. Parks.
+Authors: Megan M. Wisniewski and Jerry M. Parks
 
 ## Install
 ```bash
