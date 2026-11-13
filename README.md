@@ -15,12 +15,23 @@ mamba activate nylc
 (Linux or macOS; PyMOL, fpocket and MAFFT come from conda-forge.)
 
 ## Get the AlphaFold2 models (not stored in this repo)
-- Original Diversity Panel (95 homologs): <https://zenodo.org/records/14976747> (DOI 10.5281/zenodo.14976747), file `final_af2_dp95_zenodo.tgz`.
-- 189 additional homologs (`dp001`-`dp189`): `TODO: Zenodo link after upload`.
+Raw ColabFold output (relaxed rank-1 PDB + `scores` JSON files) for all models is on Zenodo, DOI [10.5281/zenodo.24201789](https://zenodo.org/records/24201789):
 
-The post-processing notebook starts from the **raw relaxed ColabFold rank-1 models and their `scores` JSON files**
-(`<name>_4x2_relaxed_rank_001_*.pdb`, `<name>_4x2_scores_rank_001_*.json`) in `af2_models/raw/`
-(override with `NYLC_RAW_AF2_DIR`). `TODO: confirm the uploaded archives contain these raw files (post-processed models alone are not sufficient to recompute everything).`
+| File | Contents | MD5 |
+|---|---|---|
+| `raw_af2_dp95_zenodo.tgz` | NylC-GYAQ and 95 homologs (`nyl001`-`nyl095`) | `e07213ae8a29967e6deaab36308fb30a` |
+| `raw_af2_dp189_zenodo.tgz` | 189 additional homologs (`dp001`-`dp189`) | `19528067d81e532d9e286a87689b89d9` |
+
+```bash
+mkdir -p af2_models/raw
+for f in raw_af2_dp95_zenodo raw_af2_dp189_zenodo; do
+  curl -L -o $f.tgz "https://zenodo.org/records/24201789/files/$f.tgz?download=1"
+  tar xzf $f.tgz && mv $f/* af2_models/raw/ && rm -r $f $f.tgz
+done
+```
+The notebooks expect files named `<name>_4x2_relaxed_rank_001_*.pdb` and `<name>_4x2_scores_rank_001_*.json` in `af2_models/raw/` (override with `NYLC_RAW_AF2_DIR`).
+Processed models for the original panel (two-digit names, e.g. `nyl01.pdb`) are in the earlier record
+[10.5281/zenodo.14976747](https://zenodo.org/records/14976747); the notebook regenerates processed models for all 285 enzymes.
 
 ## Run
 1. `nylc_all_prep_20261111.ipynb` writes `results/cleavage_site.csv` and the ColabFold FASTA files (`results/fasta_af2/`). Run ColabFold on those if you want to regenerate models.
