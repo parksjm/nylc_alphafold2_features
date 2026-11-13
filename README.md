@@ -30,8 +30,7 @@ for f in raw_af2_dp95_zenodo raw_af2_dp189_zenodo; do
 done
 ```
 The notebooks expect files named `<name>_4x2_relaxed_rank_001_*.pdb` and `<name>_4x2_scores_rank_001_*.json` in `af2_models/raw/` (override with `NYLC_RAW_AF2_DIR`).
-Processed models for the original panel (two-digit names, e.g. `nyl01.pdb`) are in the earlier record
-[10.5281/zenodo.14976747](https://zenodo.org/records/14976747); the notebook regenerates processed models for all 285 enzymes.
+The notebooks generate the processed models (renumbered, chain-renamed) for all 285 enzymes from these raw files.
 
 ## Run
 1. `nylc_all_prep_20261111.ipynb` writes `results/cleavage_site.csv` and the ColabFold FASTA files (`results/fasta_af2/`). Run ColabFold on those if you want to regenerate models.
