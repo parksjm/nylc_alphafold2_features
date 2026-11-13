@@ -29,8 +29,8 @@ for f in raw_af2_dp95_zenodo raw_af2_dp189_zenodo; do
   tar xzf $f.tgz && mv $f/* af2_models/raw/ && rm -r $f $f.tgz
 done
 ```
-The notebooks expect files named `<name>_4x2_relaxed_rank_001_*.pdb` and `<name>_4x2_scores_rank_001_*.json` in `af2_models/raw/` (override with `NYLC_RAW_AF2_DIR`).
-They then generate the processed models (renumbered, chain-renamed) for all 285 enzymes from these raw files.
+The postprocessing notebook expects files named `<name>_4x2_relaxed_rank_001_*.pdb` and `<name>_4x2_scores_rank_001_*.json` in `af2_models/raw/` (override with `NYLC_RAW_AF2_DIR`).
+It then generates the processed models (renumbered, chain-renamed) for all 285 enzymes from these raw files.
 
 ## Run Jupyter notebooks
 1. (Optional) `nylc_all_prep.ipynb` regenerates `results/cleavage_site.csv` (a copy is provided in `data/` and is what step 2 reads) and writes the ColabFold FASTA files (`results/fasta_af2/`). Run ColabFold on those if you want to regenerate models.
